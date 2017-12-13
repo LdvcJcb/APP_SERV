@@ -5,9 +5,7 @@ import client.Document;
 
 public class Livre implements Document{
 	private int num;
-	private Abonne abonne = null;
 	private boolean reserve = false;
-	private boolean disponible = true;
 	
 	@SuppressWarnings("unused")
 	private String nom;
@@ -27,29 +25,18 @@ public class Livre implements Document{
 
 	@Override
 	public void reserver(Abonne ab) throws PasLibreException {
-		if(!reserve){
+		if(!reserve)
 			reserve = true;
-			abonne = ab;
-		}
-		else
-			throw new PasLibreException();
 	}
 
 	@Override
 	public void emprunter(Abonne ab) throws PasLibreException {
-		if((disponible && !reserve) || (disponible && reserve && abonne == ab)) {
-			disponible = false;
-			abonne = ab;
-		}
-		else
-			throw new PasLibreException();
+		
 	}
 
 	@Override
 	public void retour() {
-		disponible = true;
-		reserve = false;
-		abonne = null;
+		
 	}
 
 }
